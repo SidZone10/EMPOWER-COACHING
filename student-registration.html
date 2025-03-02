@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration - Empower Coaching Institute</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    .home-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #1e3c72;
+      color: red;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .home-button:hover {
+      background: #2a5298;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: 100px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .form-container h2 {
+      text-align: center;
+      color: #1e3c72;
+      margin-bottom: 20px;
+    }
+    .form-container label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+    .form-container input, .form-container select, .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    .form-container input[type="submit"] {
+      background: #1e3c72;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .form-container input[type="submit"]:hover {
+      background: #2a5298;
+    }
+  </style>
+</head>
+<body>
+  <!-- Homepage Link Button -->
+  <a href="index.html" class="home-button">Home</a>
+
+  <div class="form-container">
+    <h2>Student Registration</h2>
+    <form id="student-registration-form">
+      <label for="student-name">Full Name:</label>
+      <input type="text" id="student-name" name="student-name" required>
+
+      <label for="student-email">Email:</label>
+      <input type="email" id="student-email" name="student-email" required>
+
+      <label for="student-phone">Phone Number:</label>
+      <input type="tel" id="student-phone" name="student-phone" required>
+
+      <label for="student-course">Select Course:</label>
+      <select id="student-course" name="student-course" required>
+        <option value="">Choose a course</option>
+        <option value="SSC">SSC Preparation</option>
+        <option value="CBSE">CBSE Board</option>
+        <option value="Police">Police Exams</option>
+        <option value="Computer">Computer Courses</option>
+        <option value="Competitive">Competitive Exams</option>
+      </select>
+
+      <label for="student-message">Message (Optional):</label>
+      <textarea id="student-message" name="student-message"></textarea>
+
+      <input type="submit" value="Register as Student">
+    </form>
+    <p>View all registered students <a href="registered-students.html">here</a>.</p>
+  </div>
+
+  <script>
+    // Save student data to local storage
+    document.getElementById("student-registration-form").addEventListener("submit", function (e) {
+      e.preventDefault(); // Prevent form submission
+
+      // Get form data
+      const name = document.getElementById("student-name").value;
+      const email = document.getElementById("student-email").value;
+      const phone = document.getElementById("student-phone").value;
+      const course = document.getElementById("student-course").value;
+      const message = document.getElementById("student-message").value;
+
+      // Create student object
+      const student = {
+        name,
+        email,
+        phone,
+        course,
+        message,
+      };
+
+      // Save to local storage
+      let students = JSON.parse(localStorage.getItem("students")) || []; // Retrieve existing students
+      students.push(student); // Add new student
+      localStorage.setItem("students", JSON.stringify(students)); // Save updated list
+
+      // Clear the form
+      document.getElementById("student-registration-form").reset();
+
+      // Notify the user
+      alert("Registration successful! You are now registered.");
+    });
+  </script>
+</body>
+</html>

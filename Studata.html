@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registered Students - Empower Coaching Institute</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #1e3c72;
+      margin-top: 20px;
+    }
+    .table-container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table th, table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    table th {
+      background: #1e3c72;
+      color: white;
+    }
+    table tr:hover {
+      background: #f1f1f1;
+    }
+    .no-data {
+      text-align: center;
+      color: #777;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>Registered Students</h1>
+  <div class="table-container">
+    <table id="students-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Course</th>
+          <th>Message</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Student rows will be dynamically inserted here -->
+      </tbody>
+    </table>
+    <p id="no-data-message" class="no-data" style="display: none;">No students registered yet.</p>
+  </div>
+
+  <script>
+    // Retrieve students from local storage
+    const students = JSON.parse(localStorage.getItem("students")) || [];
+
+    // Get the table body and no-data message element
+    const tbody = document.querySelector("#students-table tbody");
+    const noDataMessage = document.getElementById("no-data-message");
+
+    // Check if there are any registered students
+    if (students.length === 0) {
+      noDataMessage.style.display = "block"; // Show "No students registered yet" message
+    } else {
+      // Display students in the table
+      students.forEach((student, index) => {
+        const row = `
+          <tr>
+            <td>${student.name}</td>
+            <td>${student.email}</td>
+            <td>${student.phone}</td>
+            <td>${student.course}</td>
+            <td>${student.message || "-"}</td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    }
+  </script>
+</body>
+</html>

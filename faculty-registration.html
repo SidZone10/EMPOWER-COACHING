@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Registration - Empower Coaching Institute</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    .home-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #1e3c72;
+      color: red;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .form-container h2 {
+      text-align: center;
+      color: #1e3c72;
+      margin-bottom: 20px;
+    }
+    .form-container label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+    .form-container input, .form-container select, .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    .form-container input[type="submit"] {
+      background: #1e3c72;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .form-container input[type="submit"]:hover {
+      background: #2a5298;
+    }
+  </style>
+</head>
+<body>
+<a href="index.html" class="home-button">Home</a>
+  <div class="form-container">
+    <h2>Faculty Registration</h2>
+    <form id="faculty-registration-form">
+      <label for="faculty-name">Full Name:</label>
+      <input type="text" id="faculty-name" name="faculty-name" required>
+
+      <label for="faculty-email">Email:</label>
+      <input type="email" id="faculty-email" name="faculty-email" required>
+
+      <label for="faculty-phone">Phone Number:</label>
+      <input type="tel" id="faculty-phone" name="faculty-phone" required>
+
+      <label for="faculty-qualification">Qualification:</label>
+      <input type="text" id="faculty-qualification" name="faculty-qualification" required>
+
+      <label for="faculty-experience">Years of Experience:</label>
+      <input type="number" id="faculty-experience" name="faculty-experience" required>
+
+      <label for="faculty-subject">Subject Expertise:</label>
+      <input type="text" id="faculty-subject" name="faculty-subject" required>
+
+      <label for="faculty-message">Message (Optional):</label>
+      <textarea id="faculty-message" name="faculty-message"></textarea>
+
+      <input type="submit" value="Register as Faculty">
+<p>View all registered faculty <a href="registered-faculty.html">here</a>.</p>
+    </form>
+  </div>
+
+  <script>
+    // Save faculty data to local storage
+    document.getElementById("faculty-registration-form").addEventListener("submit", function (e) {
+      e.preventDefault(); // Prevent form submission
+
+      // Get form data
+      const name = document.getElementById("faculty-name").value;
+      const email = document.getElementById("faculty-email").value;
+      const phone = document.getElementById("faculty-phone").value;
+      const qualification = document.getElementById("faculty-qualification").value;
+      const experience = document.getElementById("faculty-experience").value;
+      const subject = document.getElementById("faculty-subject").value;
+      const message = document.getElementById("faculty-message").value;
+
+      // Create faculty object
+      const facultyMember = {
+        name,
+        email,
+        phone,
+        qualification,
+        experience,
+        subject,
+        message,
+      };
+
+      // Save to local storage
+      let faculty = JSON.parse(localStorage.getItem("faculty")) || []; // Retrieve existing faculty
+      faculty.push(facultyMember); // Add new faculty
+      localStorage.setItem("faculty", JSON.stringify(faculty)); // Save updated list
+
+      // Clear the form
+      document.getElementById("faculty-registration-form").reset();
+
+      // Notify the user
+      alert("Registration successful! You are now registered.");
+    });
+  </script>
+</body>
+</html>

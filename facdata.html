@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registered Faculty - Empower Coaching Institute</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #1e3c72;
+      margin-top: 20px;
+    }
+    .table-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table th, table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    table th {
+      background: #1e3c72;
+      color: white;
+    }
+    table tr:hover {
+      background: #f1f1f1;
+    }
+    .no-data {
+      text-align: center;
+      color: #777;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>Registered Faculty</h1>
+  <div class="table-container">
+    <table id="faculty-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Qualification</th>
+          <th>Experience</th>
+          <th>Subject</th>
+          <th>Message</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Faculty rows will be dynamically inserted here -->
+      </tbody>
+    </table>
+    <p id="no-data-message" class="no-data" style="display: none;">No faculty registered yet.</p>
+  </div>
+
+  <script>
+    // Retrieve faculty from local storage
+    const faculty = JSON.parse(localStorage.getItem("faculty")) || [];
+
+    // Get the table body and no-data message element
+    const tbody = document.querySelector("#faculty-table tbody");
+    const noDataMessage = document.getElementById("no-data-message");
+
+    // Check if there are any registered faculty
+    if (faculty.length === 0) {
+      noDataMessage.style.display = "block"; // Show "No faculty registered yet" message
+    } else {
+      // Display faculty in the table
+      faculty.forEach((facultyMember, index) => {
+        const row = `
+          <tr>
+            <td>${facultyMember.name}</td>
+            <td>${facultyMember.email}</td>
+            <td>${facultyMember.phone}</td>
+            <td>${facultyMember.qualification}</td>
+            <td>${facultyMember.experience}</td>
+            <td>${facultyMember.subject}</td>
+            <td>${facultyMember.message || "-"}</td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    }
+  </script>
+</body>
+</html>
